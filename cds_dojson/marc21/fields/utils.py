@@ -47,7 +47,8 @@ def get_author_info_from_people_collection(info):
     if '0' in info or not info.get('a'):
         # There is already enough information or we don't have a name to query
         return info
-    author_info = _get_http_request(url=URL.format(info.get('a')), retry=10)
+    author_name = info.get('a').encode('utf-8')
+    author_info = _get_http_request(url=URL.format(author_name), retry=10)
     if not author_info or len(author_info) > 1:
         # Didn't find anything or find to many matches
         return info
